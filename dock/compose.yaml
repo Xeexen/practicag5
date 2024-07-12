@@ -1,0 +1,20 @@
+services:
+  postgres:
+    container_name: product_db
+    image: "postgres:latest"
+    environment:
+      - "POSTGRES_DB=elctronica"
+      - "POSTGRES_PASSWORD=secret"
+      - "POSTGRES_USER=myuser"
+    ports:
+      - "5432:5432"
+  mysql:
+    container_name: product_db_mysql
+    image: "mysql:latest"
+    environment:
+      - "MYSQL_DATABASE=elctronica"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=verysecret"
+      - "MYSQL_USER=myuser"
+    ports:
+      - "3306:3306"

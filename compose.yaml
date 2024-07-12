@@ -1,35 +1,18 @@
 
 services:
-    app:
-      container_name: products_app
-      build:
-        context: '.'
-        dockerfile: Dockerfile
-      environment:
-        - 'POSTGRES_USER=myuser'
-        - 'POSTGRES_PASSWORD=secret'
-        - 'PGHOST=192.168.192.131' #Aqui tienes que poner tu ip
-        - 'PGPORT=5432'
-        - 'PGDATABASE=elctronica'
-      ports:
-        - 8080:8080
-      depends_on:
-        - postgres
-    postgres:
-      container_name: product_db
-      image: 'postgres:latest'
-      environment:
-        - 'POSTGRES_DB=elctronica'
-        - 'POSTGRES_PASSWORD=secret'
-        - 'POSTGRES_USER=myuser'
-      ports:
-        - '5432:5432'
-    mysql:
-      container_name: product_db_mysql
-      image: 'mysql:latest'
-      environment:
-        - 'MYSQL_ROOT_PASSWORD=secret'
-        - 'MYSQL_DATABASE=elctronica'
-        - 'MYSQL_USER=myuser'
-      ports:
-        - '3306:3306'
+#    app:
+#      container_name: products_app
+#      build:
+#        context: '.'
+#        dockerfile: Dockerfile
+#      environment:
+#        - 'POSTGRES_USER=myuser'
+#        - 'POSTGRES_PASSWORD=secret'
+#        - 'PGHOST=192.168.192.131' #Aqui tienes que poner tu ip
+#        - 'PGPORT=5432'
+#        - 'PGDATABASE=elctronica'
+#      ports:
+#        - 8080:8080
+#      depends_on:
+#        - postgres
+#        - mysql

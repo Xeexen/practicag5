@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tutorials")
-public class Tutorial {
+public class Products {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +22,11 @@ public class Tutorial {
   @Column
   private boolean published;
 
-  public Tutorial() {
+  public Products() {
 
   }
 
-  public Tutorial(String title, String description, int level, boolean published) {
+  public Products(String title, String description, int level, boolean published) {
     this.title = title;
     this.description = description;
     this.level = level;
