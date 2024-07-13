@@ -19,7 +19,7 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
-    <h2 class="text-center">Productos</h2>
+    <h2 class="text-center">Comentarios</h2>
 
     <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
          role="alert">
@@ -40,8 +40,8 @@
                         <button type="submit" class="btn btn-secondary">Buscar</button>
                     </div>
                 </div>
-                <div class="col-md-6 mt-2">
-                    <button id="btnClear" class="btn btn-info">Limpiar</button>
+                <div th:each="product : ${products}">
+                    <a th:href="@{'/comments/new/' + ${product.id}}" class="btn btn-info">Añadir comentario</a>
                 </div>
             </div>
         </form>
@@ -59,26 +59,14 @@
             <tr th:each="tutorial : ${tutorials}">
                 <th scope="row">[[${tutorial.id}]]</th>
                 <td>[[${tutorial.comment}]]</td>
-                <td>
-                    <a th:if="${tutorial.published == true}" class="fa-regular fa-square-check"
-                       th:href="@{'/products/' + ${tutorial.id} + '/published/false'}" title="Disable this tutorial"></a>
-                    <a th:if="${tutorial.published == false}" class="fa-regular fa-square icon-dark"
-                       th:href="@{'/products/' + ${tutorial.id} + '/published/true'}" title="Enable this tutorial"></a>
-                </td>
-                <td>
-                    <a th:href="@{'/products/' + ${tutorial.id}}" title="Edit this tutorial"
-                       class="fa-regular fa-pen-to-square icon-dark"></a>
-                    &nbsp;
-                    <a th:href="@{'/products/delete/' + ${tutorial.id}}" th:tutorialTitle="${tutorial.title}" id="btnDelete"
-                       title="Delete this tutorial" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
-                </td>
+                <td>[[${tutorial.email}]]</td>
             </tr>
             </tbody>
         </table>
     </div>
 
     <div class="" th:unless="${tutorials.size() > 0}">
-        <span>No se encontraron productos!</span>
+        <span>No se encontraron Comentarios!</span>
     </div>
 </div>
 

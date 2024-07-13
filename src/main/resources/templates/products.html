@@ -72,11 +72,13 @@
                 th:href="@{'/products/' + ${tutorial.id} + '/published/true'}" title="Enable this tutorial"></a>
             </td>
             <td>
-              <a th:href="@{'/products/' + ${tutorial.id}}" title="Edit this tutorial"
+              <a th:href="@{'/products/' + ${tutorial.id}}" title="Editar este producto"
                 class="fa-regular fa-pen-to-square icon-dark"></a>
               &nbsp;
               <a th:href="@{'/products/delete/' + ${tutorial.id}}" th:tutorialTitle="${tutorial.title}" id="btnDelete"
                 title="Delete this tutorial" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+                <a th:href="@{'/comments/' + ${tutorial.id}}" title="Añadir un comentario"
+                   class="fa-regular fa-pen-to-square icon-dark"></a>
             </td>
           </tr>
         </tbody>

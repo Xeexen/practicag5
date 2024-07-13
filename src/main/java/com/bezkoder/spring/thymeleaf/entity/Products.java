@@ -1,6 +1,8 @@
 package com.bezkoder.spring.thymeleaf.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tutorials")
@@ -31,6 +33,25 @@ public class Products {
     this.description = description;
     this.level = level;
     this.published = published;
+  }
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Comment> comments = new ArrayList<>();
+
+  public List<Comment> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
+  }
+
+  public void addComment(Comment comment) {
+    comments.add(comment);
+  }
+
+  public void removeComment(Comment comment) {
+    comments.remove(comment);
   }
 
   public Integer getId() {

@@ -119,18 +119,30 @@ public class TutorialController {
         return "redirect:/products";
     }
 
-    @GetMapping("/comments")
-    public String getAll(Model model) {
+    @GetMapping("/comments/{productId}")
+    public String getAll(@PathVariable String productId, Model model) {
         try {
-            List<Comment> tutorials = new ArrayList<Comment>();
+            List<Comment> comments = commentRepository.findByProductId(productId);
 
-            commentRepository.findAll().forEach(tutorials::add);
-
-            model.addAttribute("tutorials", tutorials);
+            model.addAttribute("tutorials", comments);
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
         }
 
-        return "products";
+        return "comments";
     }
+
+    @GetMapping("/comments/new/{productId}")
+    public String addComment(@PathVariable String productId, Model model) {
+        Comment comment = new Comment();
+        comment.setProductId(productId);
+
+        model.addAttribute("comment", comment);
+        model.addAttribute("pageTitle", "Crear nuevo comentario");
+
+        return "comments_form";
+    }
+
+
+
 }

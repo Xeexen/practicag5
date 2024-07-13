@@ -10,10 +10,17 @@ public class Comment {
     private Integer id;
 
     @Column(length = 128, nullable = false)
-    private String comment;
-    // Getters and setters
+    private String email;
 
-    protected Comment() {
+    @Column(length = 128, nullable = false)
+    private String comment;
+
+    @Column(length = 128, nullable = false)
+    private String productId;
+
+
+
+    public Comment() {
     }
 
     public Comment(String comment) {
@@ -30,6 +37,22 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
 }
