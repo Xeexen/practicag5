@@ -1,18 +1,15 @@
-
+version: '3'
 services:
-#    app:
-#      container_name: products_app
-#      build:
-#        context: '.'
-#        dockerfile: Dockerfile
-#      environment:
-#        - 'POSTGRES_USER=myuser'
-#        - 'POSTGRES_PASSWORD=secret'
-#        - 'PGHOST=192.168.192.131' #Aqui tienes que poner tu ip
-#        - 'PGPORT=5432'
-#        - 'PGDATABASE=elctronica'
-#      ports:
-#        - 8080:8080
-#      depends_on:
-#        - postgres
-#        - mysql
+  app:
+    container_name: products_app
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Reemplaza 8080 con el puerto en el que está corriendo tu aplicación
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    external: true
