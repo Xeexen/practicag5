@@ -102,7 +102,7 @@ public class TutorialController {
         return "redirect:/products";
     }
 
-    @GetMapping("/tutorials/{id}/published/{status}")
+    @GetMapping("/products/{id}/published/{status}")
     public String updateTutorialPublishedStatus(@PathVariable("id") Integer id, @PathVariable("status") boolean published,
                                                 Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -142,7 +142,6 @@ public class TutorialController {
 
         return "comments_form";
     }
-
 
 
 }
