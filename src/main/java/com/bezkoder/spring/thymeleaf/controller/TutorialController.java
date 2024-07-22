@@ -64,7 +64,7 @@ public class TutorialController {
     public String saveTutorial(Products tutorial, RedirectAttributes redirectAttributes) {
         try {
             tutorialRepository.save(tutorial);
-            commentRepository.save(new Comment("WASAAA"));
+//            commentRepository.save(new Comment("WASAAA"));
             redirectAttributes.addFlashAttribute("message", "El producto se creo con exito!");
         } catch (Exception e) {
             redirectAttributes.addAttribute("message", e.getMessage());
@@ -143,5 +143,16 @@ public class TutorialController {
         return "comments_form";
     }
 
+    @PostMapping("/comments/save")
+    public String saveComment(Comment comment, RedirectAttributes redirectAttributes) {
+        try {
+            commentRepository.save(comment);
 
+            redirectAttributes.addFlashAttribute("message", "El comentario se creo con exito!");
+        } catch (Exception e) {
+            redirectAttributes.addAttribute("message", e.getMessage());
+        }
+
+        return "redirect:/comments/" + comment.getProductId();
+    }
 }

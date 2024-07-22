@@ -43,6 +43,9 @@
                 <div th:each="product : ${products}">
                     <a th:href="@{'/comments/new/' + ${product.id}}" class="btn btn-info">Añadir comentario</a>
                 </div>
+                <div th:each="comment : ${tutorials}">
+                    <a th:href="@{'/comments/new/' + ${comment.id}}" class="btn-primary btn">Añadir comentario</a>
+                </div>
             </div>
         </form>
     </div>
@@ -53,6 +56,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Comentario</th>
+                <th scope="col">Email</th>
             </tr>
             </thead>
             <tbody>
