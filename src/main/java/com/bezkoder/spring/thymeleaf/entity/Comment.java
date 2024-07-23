@@ -13,7 +13,7 @@ public class Comment {
     private String email;
 
     @Column(length = 128, nullable = false)
-    private String comment;
+    private String commenter;
 
     @Column(length = 128, nullable = false)
     private String productId;
@@ -21,10 +21,10 @@ public class Comment {
     public Comment() {
     }
 
-    private Comment(Integer id, String email, String comment, String productId) {
+    private Comment(Integer id, String email, String commenter, String productId) {
         this.id = id;
         this.email = email;
-        this.comment = comment;
+        this.commenter = commenter;
         this.productId = productId;
     }
 
@@ -44,12 +44,12 @@ public class Comment {
         this.email = email;
     }
 
-    public String getComment() {
-        return comment;
+    public String getCommenter() {
+        return commenter;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setCommenter(String commenter) {
+        this.commenter = commenter;
     }
 
     public String getProductId() {

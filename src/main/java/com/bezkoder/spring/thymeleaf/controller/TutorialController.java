@@ -123,14 +123,15 @@ public class TutorialController {
     public String getAll(@PathVariable String productId, Model model) {
         try {
             List<Comment> comments = commentRepository.findByProductId(productId);
-
             model.addAttribute("tutorials", comments);
+            model.addAttribute("productId", productId);
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
         }
 
         return "comments";
     }
+
 
     @GetMapping("/comments/new/{productId}")
     public String addComment(@PathVariable String productId, Model model) {

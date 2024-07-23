@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"/>
+    <title>Registro</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="my-3">
+        <form th:action="@{/register}" method="post">
+            <div class="p-3">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="firstName">Nombre : </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="firstName" minlength="2" maxlength="256" class="form-control"
+                               id="firstName" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="lastName">Apellido : </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="lastName" minlength="2" maxlength="256" class="form-control"
+                               id="lastName" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="username">Nombre de usuario : </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="username" minlength="2" maxlength="256" class="form-control"
+                               id="username" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="email">Email : </label>
+                    <div class="col-sm-9">
+                        <input type="email" name="email" minlength="2" maxlength="256" class="form-control"
+                               id="email" required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="password">Password:</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password" required minlength="2" maxlength="128" class="form-control"
+                               id="password"/>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Registrarse" class="btn btn-primary btn-sm mr-2"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Registro</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Registro de Cliente</h2>-->
+<!--<form th:action="@{/register}" method="post">-->
+<!--    <div><label> Nombre : <input type="text" name="firstName"/> </label></div>-->
+<!--    <div><label> Apellido: <input type="text" name="lastName"/> </label></div>-->
+<!--    <div><label> Email: <input type="text" name="email"/> </label></div>-->
+<!--    <div><label> Contraseña: <input type="password" name="password"/> </label></div>-->
+<!--    <div><input type="submit" value="Registrarse"/></div>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

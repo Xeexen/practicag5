@@ -1,4 +1,5 @@
 package com.bezkoder.spring.thymeleaf.entity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ public abstract class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    private String role;
     // Getters y setters
 
     public Long getId() {
@@ -39,5 +41,13 @@ public abstract class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

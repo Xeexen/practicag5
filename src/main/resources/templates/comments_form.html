@@ -23,6 +23,7 @@
               style="max-width: 550px; margin: 0 auto">
 
             <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{productId}"/>
 
             <div class="p-3">
                 <div class="form-group row">
@@ -37,7 +38,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label" for="comment">Comentario:</label>
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{comment}" minlength="2" maxlength="256" class="form-control"
+                        <input type="text" th:field="*{commenter}" minlength="2" maxlength="256" class="form-control"
                                id="comment"/>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
             });
         });
     </script>
-
+</div>
 </body>
 
 </html>

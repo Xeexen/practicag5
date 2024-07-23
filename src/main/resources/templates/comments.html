@@ -39,13 +39,10 @@
                                placeholder="Ingresa una letra para buscar">
                         <button type="submit" class="btn btn-secondary">Buscar</button>
                     </div>
+                    <a th:href="@{'/comments/new/' + ${productId}}" class="btn btn-primary">Añadir comentario</a>
+
                 </div>
-                <div th:each="product : ${products}">
-                    <a th:href="@{'/comments/new/' + ${product.id}}" class="btn btn-info">Añadir comentario</a>
-                </div>
-                <div th:each="comment : ${tutorials}">
-                    <a th:href="@{'/comments/new/' + ${comment.id}}" class="btn-primary btn">Añadir comentario</a>
-                </div>
+
             </div>
         </form>
     </div>
@@ -62,7 +59,7 @@
             <tbody>
             <tr th:each="tutorial : ${tutorials}">
                 <th scope="row">[[${tutorial.id}]]</th>
-                <td>[[${tutorial.comment}]]</td>
+                <td>[[${tutorial.commenter}]]</td>
                 <td>[[${tutorial.email}]]</td>
             </tr>
             </tbody>
