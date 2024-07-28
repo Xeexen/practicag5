@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bezkoder.spring.thymeleaf.entity.Comment;
 import com.bezkoder.spring.thymeleaf.repository.comments.CommentRepository;
+import com.bezkoder.spring.thymeleaf.services.ErrorProducerService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +25,12 @@ public class TutorialController {
 
     private final CommentRepository commentRepository;
 
-    public TutorialController(TutorialRepository tutorialRepository, CommentRepository commentRepository) {
+    private final ErrorProducerService errorProducerService;
+
+    public TutorialController(TutorialRepository tutorialRepository, CommentRepository commentRepository, ErrorProducerService errorProducerService) {
         this.tutorialRepository = tutorialRepository;
         this.commentRepository = commentRepository;
+        this.errorProducerService = errorProducerService;
     }
 
     @GetMapping("/products")
@@ -44,6 +48,7 @@ public class TutorialController {
             model.addAttribute("tutorials", tutorials);
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
+            errorProducerService.sendError(e.getMessage());
         }
 
         return "products";
@@ -51,11 +56,16 @@ public class TutorialController {
 
     @GetMapping("/products/new")
     public String addTutorial(Model model) {
-        Products tutorial = new Products();
-        tutorial.setPublished(true);
+        try {
+            Products tutorial = new Products();
+            tutorial.setPublished(true);
 
-        model.addAttribute("tutorial", tutorial);
-        model.addAttribute("pageTitle", "Crear nuevo producto");
+            model.addAttribute("tutorial", tutorial);
+            model.addAttribute("pageTitle", "Crear nuevo producto");
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+            errorProducerService.sendError(e.getMessage());
+        }
 
         return "tutorial_form";
     }
@@ -68,6 +78,7 @@ public class TutorialController {
             redirectAttributes.addFlashAttribute("message", "El producto se creo con exito!");
         } catch (Exception e) {
             redirectAttributes.addAttribute("message", e.getMessage());
+            errorProducerService.sendError(e.getMessage());
         }
 
         return "redirect:/products";

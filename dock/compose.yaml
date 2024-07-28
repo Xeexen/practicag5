@@ -13,7 +13,7 @@ services:
 
   mysql:
     container_name: product_db_mysql
-    image: "mysql:latest"
+    image: "mysql:8.0.31"
     environment:
       - "MYSQL_DATABASE=elctronica"
       - "MYSQL_PASSWORD=secret"
