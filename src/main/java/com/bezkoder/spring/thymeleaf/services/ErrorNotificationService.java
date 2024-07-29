@@ -15,7 +15,7 @@ public class ErrorNotificationService {
     @KafkaListener(topics = "error-topic", groupId = "myGroup")
     public void listenForErrors(String errorMessage) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo("masapantaandres@gmail.com.com");
+        mailMessage.setTo("masapantaandres@gmail.com");
         mailMessage.setSubject("Error Notification");
         mailMessage.setText("An error occurred: " + errorMessage);
         mailSender.send(mailMessage);

@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - mynetwork
+      - kafka-net
 
   mysql:
     container_name: product_db_mysql
@@ -22,8 +22,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mynetwork
-
+      - kafka-net
 networks:
-  mynetwork:
+  kafka-net:
     driver: bridge

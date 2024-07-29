@@ -74,7 +74,6 @@ public class TutorialController {
     public String saveTutorial(Products tutorial, RedirectAttributes redirectAttributes) {
         try {
             tutorialRepository.save(tutorial);
-//            commentRepository.save(new Comment("WASAAA"));
             redirectAttributes.addFlashAttribute("message", "El producto se creo con exito!");
         } catch (Exception e) {
             redirectAttributes.addAttribute("message", e.getMessage());

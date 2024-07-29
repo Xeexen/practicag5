@@ -10,6 +10,5 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // Aquí puedes agregar los métodos que necesites para manejar las operaciones de los clientes
 }
 
