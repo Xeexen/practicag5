@@ -20,5 +20,14 @@ public class ErrorNotificationService {
         mailMessage.setText("An error occurred: " + errorMessage);
         mailSender.send(mailMessage);
     }
+
+    @KafkaListener(topics = "error-topic", groupId = "myGroup")
+    public void emailPrueba(String errorMessage) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo("andycha031883@gmail.com");
+        mailMessage.setSubject("Error Notification");
+        mailMessage.setText("An error occurred: " + errorMessage);
+        mailSender.send(mailMessage);
+    }
 }
 

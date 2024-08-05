@@ -1,10 +1,13 @@
 package com.bezkoder.spring.thymeleaf.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bezkoder.spring.thymeleaf.entity.Comment;
+import com.bezkoder.spring.thymeleaf.entity.User;
 import com.bezkoder.spring.thymeleaf.repository.comments.CommentRepository;
+import com.bezkoder.spring.thymeleaf.repository.users.UserService;
 import com.bezkoder.spring.thymeleaf.services.ErrorProducerService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -27,15 +30,24 @@ public class TutorialController {
 
     private final ErrorProducerService errorProducerService;
 
-    public TutorialController(TutorialRepository tutorialRepository, CommentRepository commentRepository, ErrorProducerService errorProducerService) {
+    private final UserService userService;
+
+    public TutorialController(TutorialRepository tutorialRepository, CommentRepository commentRepository, ErrorProducerService errorProducerService, UserService userService) {
         this.tutorialRepository = tutorialRepository;
         this.commentRepository = commentRepository;
         this.errorProducerService = errorProducerService;
+        this.userService = userService;
     }
 
     @GetMapping("/products")
-    public String getAll(Model model, @Param("keyword") String keyword) {
+    public String getAll(Model model, @Param("keyword") String keyword, Principal principal) {
         try {
+            String username = principal.getName();
+
+            User user = userService.findByUsername(username);
+
+            model.addAttribute("user", user);
+
             List<Products> tutorials = new ArrayList<Products>();
 
             if (keyword == null) {
@@ -53,6 +65,7 @@ public class TutorialController {
 
         return "products";
     }
+
 
     @GetMapping("/products/new")
     public String addTutorial(Model model) {

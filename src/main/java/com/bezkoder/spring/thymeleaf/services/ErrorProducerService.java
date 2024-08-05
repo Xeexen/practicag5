@@ -26,9 +26,16 @@ public class ErrorProducerService {
     @Value("${spring.second-datasource.password}")
     private String password;
 
+    private boolean isMysqlDatabaseDown = false;
+
+    private boolean isPsgDatabaseDown = false;
+
+    private boolean wasMysqlDatabaseDown = false;
+
+    private boolean wasPsgDatabaseDown = false;
+
     @Autowired
     private WebClient webClient;
-
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -41,22 +48,47 @@ public class ErrorProducerService {
     public void checkMysqlDatabase() {
         try (Connection connection = DriverManager.getConnection(secondDatabaseUrl, username, password)) {
             if (connection == null || connection.isClosed()) {
-                kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+                if (!isMysqlDatabaseDown) {
+                    kafkaTemplate.send("error-topic", "La base de datos en " + secondDatabaseUrl + " se ha detenido");
+                    isMysqlDatabaseDown = true;
+                }
+            } else {
+                if (isMysqlDatabaseDown) {
+                    kafkaTemplate.send("error-topic", "La base de datos en " + secondDatabaseUrl + " esta respondiendo correctamente");
+                    isMysqlDatabaseDown = false;
+                }
             }
+            wasMysqlDatabaseDown = isMysqlDatabaseDown;
         } catch (SQLException e) {
-            kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+            if (!isMysqlDatabaseDown) {
+                kafkaTemplate.send("error-topic", "La base de datos en " + secondDatabaseUrl + " se ha detenido");
+                isMysqlDatabaseDown = true;
+                wasMysqlDatabaseDown = isMysqlDatabaseDown;
+            }
         }
     }
 
     @Scheduled(fixedDelay = 60000)
-    public void checkPgsqlDatabase() {
+    public void checkPsgDatabase() {
         try (Connection connection = DriverManager.getConnection(databaseUrl, username, password)) {
             if (connection == null || connection.isClosed()) {
-                kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+                if (!isPsgDatabaseDown) {
+                    kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+                    isPsgDatabaseDown = true;
+                }
+            } else {
+                if (isPsgDatabaseDown) {
+                    kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " esta respondiendo correctamente");
+                    isPsgDatabaseDown = false;
+                }
             }
+            wasPsgDatabaseDown = isPsgDatabaseDown;
         } catch (SQLException e) {
-            kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+            if (!isPsgDatabaseDown) {
+                kafkaTemplate.send("error-topic", "La base de datos en " + databaseUrl + " se ha detenido");
+                isPsgDatabaseDown = true;
+                wasPsgDatabaseDown = isPsgDatabaseDown;
+            }
         }
     }
-
 }
